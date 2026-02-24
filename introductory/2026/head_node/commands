@@ -1,4 +1,4 @@
-# First: Replace XX with your cluster number (e.g., 01, 02, etc.)
+# First: Replace 06 with your cluster number (e.g., 01, 02, etc.)
 # Using vim - vim commands, :%s/01/<clusternumber>/g, :wq
 # Using nano: nano commands, Ctrl+\, Enter "01", Enter your cluster number, A, Ctrl+O, Enter, Ctrl+X
 
@@ -6,7 +6,7 @@
 sudo -i
 cd
 
-# If you are reading this in a browser - Clone repository to your lci-head-XX-1
+# If you are reading this in a browser - Clone repository to your lci-head-06-1
 git clone https://github.com/ncsa/lci-scripts.git
 
 # 1. Fix Hostname
@@ -19,7 +19,7 @@ dnf install -y ansible-core
 # 3. Install Ansible on Compute Nodes and Run Playbook
 cp -a lci-scripts/introductory/2026/head_node/Head_node_playbook .
 cd Head_node_playbook
-# Edit hosts.ini: replace XX with cluster number in [head] and [all_nodes] sections
+# Edit hosts.ini: replace 06 with cluster number in [head] and [all_nodes] sections
 bash installansible.sh
 ansible-playbook playbook.yml
 
@@ -30,17 +30,17 @@ showmount -e
 
 # Test NFS
 touch /head/NFS/testfile
-ssh lci-compute-XX-1 ls /head/NFS
-ssh lci-compute-XX-2 ls /head/NFS
+ssh lci-compute-06-1 ls /head/NFS
+ssh lci-compute-06-2 ls /head/NFS
 
 # 4. Install ClusterShell
 dnf install -y clustershell
 
 # Edit /etc/clustershell/groups.d/local.cfg, remove existing uncommented content, add:
-head: lci-head-XX-1
-compute: lci-compute-XX-[1-2]
-login: lci-head-XX-1
-storage: lci-storage-XX-1
+head: lci-head-06-1
+compute: lci-compute-06-[1-2]
+login: lci-head-06-1
+storage: lci-storage-06-1
 
 # Test ClusterShell
 clush -g compute "uptime"
@@ -94,11 +94,11 @@ $template DynamicFile,"/var/log/%HOSTNAME%/forwarded-logs.log"
 systemctl restart rsyslog
 
 # On compute and storage nodes, add to bottom of /etc/rsyslog.conf:
-*.* @lci-head-XX-1
+*.* @lci-head-06-1
 
 # Restart rsyslog on compute/storage nodes
 systemctl restart rsyslog
 
 # Verify on head node there are logs being generated
-ls /var/log/lci-compute-XX-*/
-ls /var/log/lci-storage-XX-*/
+ls /var/log/lci-compute-06-*/
+ls /var/log/lci-storage-06-*/
