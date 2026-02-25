@@ -64,7 +64,11 @@ ansible-playbook -i hosts.ini destroy.yml
 ```bash
 systemctl status slurmctld
 systemctl status slurmdbd
-sinfo
+sinfo  
+
+# Fix path problem if sinfo shows command not found 
+e.g. add the following to ~/.bashrc
+export PATH=/opt/slurm/25.05.6-built/bin:$PATH
 ```
 
 ### On compute nodes:
