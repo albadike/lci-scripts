@@ -1,5 +1,5 @@
 # Lab: Configuration Management Tools - Commands
-# Replace XX with your cluster number (e.g., 01, 02, etc.)
+# Replace XX with your cluster number (e.g., 06)
 # Using vim - vim commands, :%s/XX/<clusternumber>/g, :wq
 # Using nano - nano commands, Ctrl+\, Enter "XX", Enter your cluster number, A, Ctrl+O, Enter, Ctrl+X
 
@@ -93,17 +93,17 @@ dnf install -y salt-minion
 
 # Using your preferred editor (vim or nano), create /etc/salt/minion.d/master.conf
 # The file should contain the following two lines:
-#   master: lci-head-XX-1
-#   id: lci-head-XX-1
+#   master: lci-head-06-1
+#   id: lci-head-06-1
 vim /etc/salt/minion.d/master.conf
 
 systemctl enable --now salt-minion
 
 # Install Salt Minion (compute nodes)
 clush -g compute "dnf install -y salt-minion"
-clush -g compute "echo 'master: lci-head-XX-1' > /etc/salt/minion.d/master.conf"
-clush -w lci-compute-XX-1 "echo 'id: lci-compute-XX-1' > /etc/salt/minion.d/id.conf"
-clush -w lci-compute-XX-2 "echo 'id: lci-compute-XX-2' > /etc/salt/minion.d/id.conf"
+clush -g compute "echo 'master: lci-head-06-1' > /etc/salt/minion.d/master.conf"
+clush -w lci-compute-06-1 "echo 'id: lci-compute-06-1' > /etc/salt/minion.d/id.conf"
+clush -w lci-compute-06-2 "echo 'id: lci-compute-06-2' > /etc/salt/minion.d/id.conf"
 clush -g compute "systemctl enable --now salt-minion"
 
 # Verify minions
@@ -300,15 +300,15 @@ ansible-playbook -i hosts.ini destroy.yml
 #wwctl overlay build
 #
 ## Working with Nodes
-#wwctl node add lci-compute-XX-1 --ipaddr=10.0.1XX.1 --discoverable=true --image=rockylinux-9
-#wwctl node add lci-compute-XX-2 --ipaddr=10.0.1XX.2 --discoverable=true --image=rockylinux-9
+#wwctl node add lci-compute-06-1 --ipaddr=10.0.106.1 --discoverable=true --image=rockylinux-9
+#wwctl node add lci-compute-06-2 --ipaddr=10.0.106.2 --discoverable=true --image=rockylinux-9
 #
 #wwctl node list
 #wwctl node list --all
 #
 ## Set node properties
-#wwctl node set lci-compute-XX-1 --image=rockylinux-9
-#wwctl node set lci-compute-XX-1 \
+#wwctl node set lci-compute-06-1 --image=rockylinux-9
+#wwctl node set lci-compute-06-1 \
 #  --system-overlays="wwinit,wwclient,fstab,hostname,ssh.host_keys,site-custom"
 #
 ## Configure services
