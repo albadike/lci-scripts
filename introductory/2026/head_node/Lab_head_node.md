@@ -388,7 +388,7 @@ clush -g compute "free -h"
 
 Run commands on specific nodes:
 ```bash
-clush -w lci-compute-XX-1 "hostname"
+clush -w lci-compute-06-1 "hostname"
 ```
 
 ### Fix Hostnames on Compute and Storage Nodes
