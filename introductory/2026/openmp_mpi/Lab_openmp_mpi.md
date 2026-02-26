@@ -120,7 +120,7 @@ Now run executable `hello.x` and see what happens:
 ```
 
 The output comes with two threads. 
-By default, when you run an executable compiled with the openmp support, the number of threads becomes equal to the number of the CPU cores available on the system.
+By default, when you run an executable compiled with the openmp support, the number of threads becomes equal to the number of the CPU cores available on the system. The test cluster for this lab ONLY have 2 CPUs per node.
 
 Define environment variable OMP_NUM_THREADS=16, then run the executable again:
 
