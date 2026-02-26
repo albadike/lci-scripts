@@ -192,7 +192,7 @@ int main() {
 ```
 
 
-Recompile it again and run several times. Notice the different output results.
+Recompile it again and run it several times. Notice the different output results.
 
 
 ### Performance demonstration with OpenMP
@@ -248,9 +248,9 @@ Exit `top` with **q** key stroke.
 ***
 ### Setup mpiuser environment for MPI
 
-Assuming the MPI compilation and installation on the cluster is completed, exit from compute the node.
+Assuming the MPI compilation and installation on the cluster is completed, exit from the compute node.
 
-Setup environment variables for MPI by placing the snipped below into .bashrc file of `mpiuser`:
+Setup environment variables for MPI by placing the snippet below into .bashrc file of `mpiuser`:
 
 ```yaml
 export MPI_HOME=export MPI_HOME=/usr/lib64/openmpi
@@ -281,7 +281,7 @@ Verify that `mpirun` works:
 mpirun -n 4 -hostfile nodes.txt uname -n
 ```
 
-If it works, it should have every compute node to print out its host name twice.
+If it works, it should have every compute node print out its hostname twice.
 
 File `nodes.txt` contains the list of the compute nodes and the number of CPU cores on each node:
 
