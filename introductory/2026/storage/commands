@@ -9,7 +9,12 @@ dnf -y install sysstat
 # In one session run
 iostat -xkz 2
 
-# In another session run this (sub in one of your 5GB devices for $device)
+# In another session, run this (sub in one of your 5GB devices for $device)
+# $device is one of your disk devices, e.g., vdc
+# Results
+# 4500+0 records in
+# 4500+0 records out
+# Total e.g. 14967
 dd if=/dev/urandom of=/dev/$device bs=1M count=4500
 
 ## Other handy commands to install/play with
@@ -19,15 +24,21 @@ dnf -y install iotop
 iotop
 netstat -i $interface
 
-# Check permissions through full file tree
+# Check permissions through the full file tree
 namei -l /usr/share/misc/magic
 
 ## mdadm on your storage node
 dnf -y install mdadm
+
+# $dev_regex is /dev/vd[b-e] 
 mdadm --zero-superblock --force /dev/$dev_regex
+
 mdadm --create /dev/md1 --level=6 --raid-devices=4 /dev/vdb /dev/vdc /dev/vdd /dev/vde
 lsblk
+
+# Accept yes to create a bitmap format. The line may seem like errors, but it's ok
 cat /proc/mdstat
+
 mdadm -D /dev/md1
 mkfs.ext4 /dev/md1
 mkdir /scratch && mount /dev/md1 /scratch
@@ -39,9 +50,15 @@ mdadm --stop /dev/md1
 dnf -y install https://zfsonlinux.org/epel/zfs-release-2-3$(rpm --eval "%{dist}").noarch.rpm
 dnf install -y epel-release kernel-devel
 dnf install -y zfs
+
+# activate ZFS filesystem functionality, typically after a system update, reboot, or when encountering 
 /sbin/modprobe zfs
+
 zpool status
+
+# Edit $dev# to vdb vdc vdd vde
 zpool create scratch raidz2 $dev1 $dev2 $dev3 $dev4 -f
+
 zpool status
 df -h
 zfs get all scratch
@@ -49,18 +66,18 @@ zfs get all scratch
 ## NFS installed on all nodes (compute/login/storage)
 dnf -y install nfs-utils
 
-# Add following lines to /etc/exports on storage node (sub in IP addresses of your compute/login nodes)
-/scratch 192.168.0.X(rw,sync,no_root_squash)
-/scratch 192.168.0.X(rw,sync,no_root_squash)
-/scratch 192.168.0.X(rw,sync,no_root_squash)
+# Add the following lines to /etc/exports on the storage node (sub in IP addresses of your compute/login nodes)
+/scratch 192.168.6.189(rw,sync,no_root_squash)
+/scratch 192.168.6.50(rw,sync,no_root_squash)
+/scratch 192.168.6.168(rw,sync,no_root_squash)
 
 systemctl start nfs-server && exportfs -ra
 
 ## On compute/login nodes
 mkdir -p /scratch
 
-#Use IP addres of storage node add following to /etc/fstab
-192.168.0.X:/scratch	/scratch   nfs defaults 0 0 
+#Use IP address of the storage node, add the following to /etc/fstab
+192.168.6.104:/scratch  /scratch   nfs defaults 0 0 
 
 # Mount the FS on your head/login nodes
 mount /scratch
