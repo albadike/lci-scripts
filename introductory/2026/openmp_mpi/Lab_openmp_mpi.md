@@ -61,6 +61,7 @@ Copy folders with OpenMP and MPI exercises into mpiuser home directory:
 ```bash
 cd ..
 # You should now be in the lci-scripts repo in the Lab_MPI directory
+# i.e. /root/lci-scripts/introductory/2026/openmp_mpi/Lab_MPI
 sudo cp -a OpenMP /head/NFS/mpiuser/
 sudo cp -a MPI /head/NFS/mpiuser/
 chown -R mpiuser:mpiuser /head/NFS/mpiuser
