@@ -31,17 +31,17 @@ For correct accounting, association, and resource assignments, users and account
 
 Accounts in SLURM have the meaning like posix groups in Linux.
 
-We create account (group) lci2024:
+We create account (group) lci2026:
 
 ```bash
-sudo sacctmgr -i add account lci2024 Description="LCI 2024 workshop"
+sudo sacctmgr -i add account lci2026 Description="LCI 2026 workshop"
 ```
 
-We create users `mpiuser` and `rocky` and assign them to cluster "cluster" and account (group) lci2024:
+We create users `mpiuser` and `rocky` and assign them to cluster "cluster" and account (group) lci2026:
 
 ```bash
-sudo sacctmgr -i create user name=mpiuser cluster=cluster account=lci2024
-sudo sacctmgr -i create user name=rocky cluster=cluster account=lci2024
+sudo sacctmgr -i create user name=mpiuser cluster=cluster account=lci2026
+sudo sacctmgr -i create user name=rocky cluster=cluster account=lci2026
 ```
 
 Check the accounts and users:
