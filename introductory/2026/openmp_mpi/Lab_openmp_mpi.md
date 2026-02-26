@@ -35,12 +35,12 @@ edit `hosts.ini` and replace the XX with your cluster number
 ansible-playbook install_mpi.yml
 ```
 
-Test to make sure it installed correctly
+Test to make sure it is installed correctly
 ```bash
 /usr/lib64/openmpi/bin/ompi_info --version
 ````
 MPI needs to be compiled with PMIx support in order to integrate with SLURM scheduler.
-We will not be doing that, because it's a much more difficult process. Don't install directly via `dnf` on your own cluster.
+We will NOT be doing that, because it's a much more difficult process. DO NOT install directly via `dnf` on your own cluster.
 
 - The version is older than you can get otherwise
 
