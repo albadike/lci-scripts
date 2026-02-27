@@ -21,6 +21,10 @@ clush -g compute "useradd -u 2004 mpiuser2004"
 
 # Copy the lab code to mpiuser2004's home
 # This creates /home/mpiuser2004/Lab_MPI/ with MPI/ and OpenMP/ subdirectories
+
+## Al-Bashir added
+mkdir -p /home/mpiuser2004/Lab_MPI
+
 cp -r MPI OpenMP /home/mpiuser2004/Lab_MPI/
 chown -R mpiuser2004:mpiuser2004 /home/mpiuser2004/Lab_MPI
 
