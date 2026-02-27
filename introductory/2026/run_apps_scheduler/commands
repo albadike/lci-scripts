@@ -15,22 +15,22 @@ cd ~
 cp -a lci-scripts/introductory/2026/run_apps_scheduler/Run_apps_scheduler .
 cd Run_apps_scheduler
 
-# 1. Create Linux user mpiuser on all nodes (must exist everywhere for Slurm jobs)
-useradd -u 2004 mpiuser
-clush -g compute "useradd -u 2004 mpiuser"
+# 1. Create Linux user mpiuser2004 on all nodes (must exist everywhere for Slurm jobs)
+useradd -u 2004 mpiuser2004
+clush -g compute "useradd -u 2004 mpiuser2004"
 
-# Copy the lab code to mpiuser's home
-# This creates /home/mpiuser/Lab_MPI/ with MPI/ and OpenMP/ subdirectories
-cp -r MPI OpenMP /home/mpiuser/Lab_MPI/
-chown -R mpiuser:mpiuser /home/mpiuser/Lab_MPI
+# Copy the lab code to mpiuser2004's home
+# This creates /home/mpiuser2004/Lab_MPI/ with MPI/ and OpenMP/ subdirectories
+cp -r MPI OpenMP /home/mpiuser2004/Lab_MPI/
+chown -R mpiuser2004:mpiuser2004 /home/mpiuser2004/Lab_MPI
 
 # Verify files are in place
-ls -la /home/mpiuser/Lab_MPI/OpenMP/
-ls -la /home/mpiuser/Lab_MPI/MPI/
+ls -la /home/mpiuser2004/Lab_MPI/OpenMP/
+ls -la /home/mpiuser2004/Lab_MPI/MPI/
 
 # Create Slurm accounts and users
 sacctmgr -i add account lci2026 Description="LCI 2026 workshop"
-sacctmgr -i create user name=mpiuser cluster=cluster account=lci2026
+sacctmgr -i create user name=mpiuser2004 cluster=cluster account=lci2026
 sacctmgr -i create user name=rocky cluster=cluster account=lci2026
 sacctmgr list associations format=user,account
 
@@ -40,7 +40,7 @@ sinfo -N -l
 squeue
 
 # 3. salloc - allocate resources for OpenMP run
-sudo su - mpiuser
+sudo su - mpiuser2004
 cd ~/Lab_MPI/OpenMP
 salloc -n 2
 
@@ -57,7 +57,7 @@ export OMP_NUM_THREADS=2
 # Exit salloc, check resources and accounting
 exit
 sinfo
-sacct -u mpiuser
+sacct -u mpiuser2004
 
 # 4. srun - interactive runs
 
@@ -67,7 +67,7 @@ cd ~/Lab_MPI/OpenMP
 export OMP_NUM_THREADS=2
 ./heated_plate.x
 exit
-sacct -u mpiuser
+sacct -u mpiuser2004
 
 # Check MPI support
 srun --mpi=list
@@ -76,7 +76,7 @@ srun --mpi=list
 cd ~/Lab_MPI/MPI
 srun --mpi=pmix -n 4 mpi_heat2D.x
 srun --mpi=pmix_v4 -n 4 mpi_heat2D.x
-sacct -u mpiuser
+sacct -u mpiuser2004
 
 # 5. sbatch - submit batch scripts
 
