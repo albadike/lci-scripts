@@ -71,7 +71,6 @@ e.g. add the following to ~/.bashrc
 export PATH=/opt/slurm/25.05.6-built/bin:$PATH
 ```
 
-### On compute nodes:
 ```bash
 ssh lci-compute-01-1 systemctl status slurmd
 ssh lci-compute-01-2 systemctl status slurmd
