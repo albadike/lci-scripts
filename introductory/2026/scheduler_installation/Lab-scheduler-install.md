@@ -10,7 +10,7 @@ cp -a lci-scripts/introductory/2026/scheduler_installation/Scheduler_installatio
 cd Scheduler_installation_playbook
 ```
 
-### Update hosts.ini:
+### Update inventory file, hosts.ini:
 
 ```bash
 vim hosts.ini
