@@ -6,7 +6,7 @@ Replace `XX` with your cluster number (e.g., 02, 03, etc.) in all commands and c
 Using vim:
 ```bash
 vim todo.md
-:%s/01/<clusternumber>/g
+:%s/XX/<clusternumber>/g
 :wq
 ```
 ## run the below comamands as root
