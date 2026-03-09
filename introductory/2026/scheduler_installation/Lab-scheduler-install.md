@@ -1,6 +1,6 @@
 # Scheduler Installation - Todo List
 
-Replace `01` with your cluster number (e.g., 02, 03, etc.) in all commands and configuration files.
+Replace `XX` with your cluster number (e.g., 02, 03, etc.) in all commands and configuration files.
 
 ## 1. Copy Playbook and Update Configuration
 
