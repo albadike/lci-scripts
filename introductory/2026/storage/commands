@@ -15,6 +15,7 @@ iostat -xkz 2
 # 4500+0 records in
 # 4500+0 records out
 # Total e.g. 14967
+# dd (Data Definition) is used to write random data directly to a block device.
 dd if=/dev/urandom of=/dev/$device bs=1M count=4500
 
 ## Other handy commands to install/play with
@@ -27,7 +28,7 @@ netstat -i $interface
 # Check permissions through the full file tree
 namei -l /usr/share/misc/magic
 
-## mdadm on your storage node
+## mdadm (Multiple Device Administration) on your storage node
 dnf -y install mdadm
 
 # $dev_regex is /dev/vd[b-e] 
