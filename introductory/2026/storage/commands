@@ -40,7 +40,8 @@ lsblk
 # Accept yes to create a bitmap format. The line may seem like errors, but it's ok
 cat /proc/mdstat
 
-mdadm -D /dev/md1
+#mdadm -D /dev/md1
+mdadm --detail /dev/md1
 mkfs.ext4 /dev/md1
 mkdir /scratch && mount /dev/md1 /scratch
 
