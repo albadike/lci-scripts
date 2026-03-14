@@ -55,15 +55,14 @@ dnf install -y zfs
 
 # activate ZFS filesystem functionality, typically after a system update, reboot, or when encountering 
 /sbin/modprobe zfs
-
 zpool status
 
 # Edit $dev# to vdb vdc vdd vde
 zpool create scratch raidz2 $dev1 $dev2 $dev3 $dev4 -f
-
 zpool status
 df -h
 zfs get all scratch
+
 
 ## NFS installed on all nodes (compute/login/storage)
 dnf -y install nfs-utils
